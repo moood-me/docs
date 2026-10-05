@@ -51,6 +51,15 @@ A file belongs to the element or widget of `scene.json` with that `id`; a file n
 moood formats the code it writes (Biome: 2 spaces, 120 columns); write your code readably too, one
 statement a line.
 
+## Games
+
+A game played on worlds has a repository of its own, `<space>--game--<slug>`: `game.json` (its
+type, title, description, genres, the world it is played on — that world's repository — and the
+scenes it takes in, `{world, folder, version}`) and a folder of its type (`moood/agents.json`, what
+the agents are told; `asked/story.json`, the story) that only that game type reads. Its versions are
+the commits of its `main`; a play keeps the game's version and the world's it began on. Games are
+changed through moood (the site, the game types) — not through the MCP, which is for worlds.
+
 ## What a scene is
 
 `scene-format.md` — the scene's language and its craft: the schema, the elements, how they are
