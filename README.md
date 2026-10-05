@@ -29,11 +29,31 @@ change of a scene there is a new version of it; nothing is ever lost.
     scenes/<folder>/lib.js             code its elements share      (spec.lib)
     scenes/<folder>/widgets/<id>.html  a widget's markup           (widgets[].html)
     scenes/<folder>/notes.md           the scene's notes            (spec.notes)
+    modules/<name>.js                  a module: code the world's scenes share
+    modules/<name>.data.json           its data, if it has any (not formatted)
+    modules/<name>.md                  what it offers and how to call it
 
 A file belongs to the element or widget of `scene.json` with that `id`; a file nothing in
 `scene.json` names is an error. An element's code is the body of its draw function, as
 `scene-format.md` describes. A new folder is a new scene. The repository's name is
 `<space>--<slug>`; the world's address on moood is `<space>/<slug>`.
+
+## Modules
+
+A module is code the world's scenes share — its people, its animals, its things — so they are the
+same in every scene. `modules/<name>.js` is the body of `function (anim, data)` returning what it
+offers (`anim`: the animator's toolkit; `data`: `modules/<name>.data.json` parsed, or null); its
+`.md` says what it offers and how to call it — read it before using the module, and keep it true
+when you change the module. A scene lists the modules it uses in `scene.json` (`"modules":
+["people"]`) and gets them as `e.kit.people` in its elements' code (`scene.kit.people` in scripts,
+`kit.people` in its lib).
+
+Every scene shows the modules as `main` has them now: a change of a module reaches every scene that
+uses it, at once — it is a new version of the world, not of those scenes (a scene's versions are
+the changes of its own folder; an old version opens with the modules as they were then). So before
+you merge a change of a module, look at the scenes that use it (`look_at_branch`), not only at the
+one you made it for. A merge is refused if a scene lists a module that isn't there, or a changed
+module isn't valid JavaScript.
 
 ## Working in it
 
