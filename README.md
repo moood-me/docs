@@ -76,7 +76,8 @@ statement a line.
 A game played on worlds has a repository of its own, `<space>--game--<slug>`: `game.json` (its
 type, title, description, genres, the world it is played on — that world's repository — and the
 scenes it takes in, `{world, folder, version}`) and a folder of its type (`moood/agents.json`, what
-the agents are told; `asked/story.json`, the story) that only that game type reads. Its versions are
+the agents are told; `asked/story.json`, the story; `bespoke/`, the game's own code — `game.js` and
+what it imports) that only that game type reads. Its versions are
 the commits of its `main`; a play keeps the game's version and the world's it began on.
 
 Through the MCP: `list_games`, `create_game`, `read_game` (game.json and its type's files),
