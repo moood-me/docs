@@ -77,8 +77,14 @@ A game played on worlds has a repository of its own, `<space>--game--<slug>`: `g
 type, title, description, genres, the world it is played on — that world's repository — and the
 scenes it takes in, `{world, folder, version}`) and a folder of its type (`moood/agents.json`, what
 the agents are told; `asked/story.json`, the story) that only that game type reads. Its versions are
-the commits of its `main`; a play keeps the game's version and the world's it began on. Games are
-changed through moood (the site, the game types) — not through the MCP, which is for worlds.
+the commits of its `main`; a play keeps the game's version and the world's it began on.
+
+Through the MCP: `list_games`, `create_game`, `read_game` (game.json and its type's files),
+`change_game` (title, description, genres, who sees it), `write_game_file` (one file of its type —
+the game's next version). For more: `game_repo` (clone it, a branch of your own) and
+`merge_game_branch` — refused if the branch changes anything but `game.json` and its type's folder,
+or if `game.json` is no longer this game (its type changed, a world or a scene it names isn't there).
+Only a game's author changes it.
 
 ## What a scene is
 
