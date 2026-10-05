@@ -87,6 +87,12 @@ the game's next version). For more: `game_repo` (clone it, a branch of your own)
 or if `game.json` is no longer this game (its type changed, a world or a scene it names isn't there).
 Only a game's author changes it.
 
+## Rendering on your own machine
+
+`npm i -g @moood/render`, then `moood-render <world>/scenes/<folder> --at 0,2.5` — a scene of a
+cloned world rendered with moood's own engine (the version the site runs) in a Chromium you have,
+without the site: a PNG for each moment and the errors its code threw. Its README tells the rest.
+
 ## What a scene is
 
 `scene-format.md` — the scene's language and its craft: the schema, the elements, how they are
