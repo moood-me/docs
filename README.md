@@ -55,6 +55,13 @@ you merge a change of a module, look at the scenes that use it (`look_at_branch`
 one you made it for. A merge is refused if a scene lists a module that isn't there, or a changed
 module isn't valid JavaScript.
 
+A people module's recorded motions are entries of its data (`{n, fps, v, p, c}`: bone directions, the
+pelvis, foot contacts). A motion none of its recordings gives — someone getting up and walking to the
+window, a hand on another's shoulder — `make_motion` makes: a model trained on motion capture, from plain
+English prompts and constraints (where the person goes, poses taken from motions made before; going on
+from one). `look_at_motion` shows it on a body; it answers with such an entry. How to ask it well:
+`motion_guide` (motion.md here).
+
 ## Working in it
 
 1. `world_repo(address)` → clone with the git arguments it gives (the token travels in a header —
