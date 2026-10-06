@@ -92,3 +92,50 @@ into the module's data. The module plays it in place, at the figure's `at`; with
 along the path from there — the steps and the way over the floor from one motion, nothing sliding. Contacts
 Kimodo made exact (a hand on a shoulder) land a few centimetres off on a body of other proportions: where it
 matters, the module has to bring the hand there itself.
+
+## How a person is seen
+
+`look_at_motion(key, look=…)` (and `moood-render motion … --look '{…}'`) shows a motion on a person of your
+choosing — the motion is the same on anyone: it is put on their own bones (a child's, a tall man's), the walk
+as long as their legs. Two kinds:
+
+**A figure of designed shapes** — `{"kind": "shapes", "style", "who", …}`: a stylised person built of simple
+volumes on the skeleton (each limb one tube along its bones, garments hanging from what they rest on), drawn
+flat or in two tones, in depth.
+
+- `style` — `shadow` (slender, small-headed, tapering to points; a silhouette with a warm rim — Gris, Limbo),
+  `soft` (round, big-headed, mittens, tinted lines — Cartoon Saloon), `graphic` (broad shoulders, narrow waist,
+  flat — UPA), `toy` (soft chunky figurines in matte clay, simple faces), `geometry` (faceted, two tones —
+  Kentucky Route Zero), `flat` (straight-edged flat geometry lit by the scene: a coat a trapezoid, legs bars).
+- `who` — `man`, `woman`, `teen`, `child`, `toddler`, `old`, `smith`, `death`, `school` (a schoolgirl),
+  `youth`, `lady` (in a coat, a hat, a scarf), `grandpa` (in a cap and a scarf), `janitor`: proportions,
+  clothes, hair and colours of their own; anything below overrides them.
+- `garment` — `none` (a shirt and trousers), `tunic`, `coat`, `dress`, `robe`, `apron`, `jacket`, `skirt`,
+  `sailor`; `hood`, `scarf`, `socks` — true or false; `hair` — `none`, `short`, `long`, `bun`, `bob`,
+  `straight`, `ponytail`, `spiky`; `hat` — `none`, `cap`, `hat`; `face` — `none`, `simple`, `dot`.
+- `paint` — `silhouette`, `rim` (a silhouette with a rim of light), `flat`, `toned`, `clay`, `lit` (flat
+  colours under the scene's light); `line` — outlines, true or false; `ground` — the light and background:
+  `studio`, `fog`, `night`, `dusk`, `day`, `paper`, `sunset`, `lamp`, `mist`.
+- `body` — proportions as factors of a man's: `height`, `head`, `neck`, `shoulders`, `arms`, `hips`, `legs`,
+  `thick`; `colors` — `skin`, `hair`, `top`, `bottom`, `shoes`, `garment`, `hat`, `accent`, `socks` ("#rrggbb").
+
+**A body** — `{"who", "style", …}` (no `kind`): a real human body of any age and build (NAVER's Anny) in real
+clothes fitted to it, loose cloth swinging.
+
+- `who` — `man`, `woman`, `boy`, `girl`, `child`, `toddler`, `oldman`, `oldwoman`, `smith`, `death`.
+- `style` — `clay` (soft matte sculpture), `flat` (flat colour, one shade), `silhouette`; `light` — `studio`,
+  `day`, `evening`, `night`.
+- `outfit` — `work` (a sweater and trousers), `polo`, `summer` (a t-shirt and shorts), `dress`, `skirt`,
+  `loose` (an oversized sweater), `looseskirt`, `tunic`, `smith` (a shirt and an apron); `hair` — `none`,
+  `short`, `fringe`, `bob`, `shoulder`, `long`, `bun`, `braid`; `face` — `minimal`, `none`; `colors` — `skin`,
+  `hair`, `top`, `bottom`, `shoes`, `apron`.
+
+Everyone in every style, walking and sitting (one sheet a style):
+[shapes: shadow](https://github.com/moood-me/docs/blob/main/people/shapes-shadow.webp) · [soft](https://github.com/moood-me/docs/blob/main/people/shapes-soft.webp) ·
+[graphic](https://github.com/moood-me/docs/blob/main/people/shapes-graphic.webp) · [toy](https://github.com/moood-me/docs/blob/main/people/shapes-toy.webp) · [geometry](https://github.com/moood-me/docs/blob/main/people/shapes-geometry.webp) ·
+[flat](https://github.com/moood-me/docs/blob/main/people/shapes-flat.webp) · [body: clay](https://github.com/moood-me/docs/blob/main/people/body-clay.webp) · [flat](https://github.com/moood-me/docs/blob/main/people/body-flat.webp) ·
+[silhouette](https://github.com/moood-me/docs/blob/main/people/body-silhouette.webp). To see your own: `look_at_motion` with the look.
+
+What it can't do (yet): only people — two arms, two legs (Kimodo moves one human skeleton); children and old
+people move as adults do (it has no age); no foot placement on uneven ground; faces don't move. These figures
+are for looking at motions so far — a scene's people are still its module's (their clips, above).

@@ -60,8 +60,13 @@ A people module's recorded motions are entries of its data (`{n, fps, v, p, c}`:
 pelvis, foot contacts). A motion none of its recordings gives — someone getting up and walking to the
 window, a hand on another's shoulder — `make_motion` makes: a model trained on motion capture, from plain
 English prompts and constraints (where the person goes, poses taken from motions made before; going on
-from one). `look_at_motion` shows it on a body; it answers with such an entry. How to ask it well:
-`motion_guide` (motion.md here).
+from one). `look_at_motion` shows it on a person — anyone, in any of the styles (a real body in clay, flat or
+silhouette; a figure of shapes from a sign to a toy), with a gallery of them all; it answers with such an
+entry. How to ask it well, and how a person may be seen: `motion_guide` (motion.md here).
+
+`sandbox/` here holds working examples made outside moood (a WebGL fashion show: walks put onto any
+skeleton, garments over bodies, light, cameras) — ideas and pieces to take into a scene, rewritten
+the way the scene format asks.
 
 ## Working in it
 
