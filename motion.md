@@ -129,6 +129,9 @@ clothes fitted to it, loose cloth swinging.
   `loose` (an oversized sweater), `looseskirt`, `tunic`, `smith` (a shirt and an apron); `hair` — `none`,
   `short`, `fringe`, `bob`, `shoulder`, `long`, `bun`, `braid`; `face` — `minimal`, `none`; `colors` — `skin`,
   `hair`, `top`, `bottom`, `shoes`, `apron`.
+- A minimal face's `expression` — `neutral`, `smile`, `laugh`, `sad`, `angry`, `surprised`, `afraid`, `disgusted`,
+  `thinking`, `tired`, `talking`; `intensity` — how much of it (1; up to 1.5); `blink` — blinks now and then (true);
+  `talk` — the mouth talks, whatever the expression (false). The same moment is the same face every time.
 
 Everyone in every style, walking and sitting (one sheet a style):
 [shapes: shadow](https://github.com/moood-me/docs/blob/main/people/shapes-shadow.webp) · [soft](https://github.com/moood-me/docs/blob/main/people/shapes-soft.webp) ·
@@ -137,5 +140,6 @@ Everyone in every style, walking and sitting (one sheet a style):
 [silhouette](https://github.com/moood-me/docs/blob/main/people/body-silhouette.webp). To see your own: `look_at_motion` with the look.
 
 What it can't do (yet): only people — two arms, two legs (Kimodo moves one human skeleton); children and old
-people move as adults do (it has no age); no foot placement on uneven ground; faces don't move. These figures
-are for looking at motions so far — a scene's people are still its module's (their clips, above).
+people move as adults do (it has no age); no foot placement on uneven ground; a figure of shapes' face doesn't
+move, a body's talks without words (its lips follow no voice). These figures are for looking at motions so far — a
+scene's people are still its module's (their clips, above).
