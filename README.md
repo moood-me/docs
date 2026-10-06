@@ -27,6 +27,7 @@ change of a scene there is a new version of it; nothing is ever lost.
     scenes/<folder>/elements/<id>.script.js   an element's script (objects[].script)
     scenes/<folder>/script.js          the scene's script          (spec.script)
     scenes/<folder>/lib.js             code its elements share      (spec.lib)
+    scenes/<folder>/relief.js          the land's shape            (spec.relief)
     scenes/<folder>/widgets/<id>.html  a widget's markup           (widgets[].html)
     scenes/<folder>/notes.md           the scene's notes            (spec.notes)
     modules/<name>.js                  a module: code the world's scenes share
