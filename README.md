@@ -81,7 +81,8 @@ the way the scene format asks.
 2. Make a branch of your own. **Never push to `main`.**
 3. Change files; commit and push your branch as often as you like.
 4. `look_at_branch(address, branch, folder)` shows a scene of your branch rendered, with the errors
-   its code throws. Look at your work: does it show what was asked, and is it beautiful?
+   its code throws (moments, sheets, films: Looking at your work, below). Look at your work: does it
+   show what was asked, and is it beautiful?
 5. `merge_branch(address, branch, note)` puts the branch into the world: each scene it changed gets
    a new version, a new folder a new scene. It is refused — nothing changes — if the branch changes
    a scene the person may not change, leaves a folder that isn't a scene, or conflicts with `main`
@@ -106,11 +107,36 @@ the game's next version). For more: `game_repo` (clone it, a branch of your own)
 or if `game.json` is no longer this game (its type changed, a world or a scene it names isn't there).
 Only a game's author changes it.
 
+## Looking at your work
+
+Three tools render a scene with moood's own engine — the version the site runs — and answer the
+picture and the errors and warnings its code gave:
+- `render_scene(address, device)` — a scene as the world has it (any version);
+- `look_at_branch(address, branch, folder)` — as your pushed branch has it;
+- `look_at_files(address, files)` — as files you send, not pushed anywhere: a scene's folder,
+  `{path in it: text}` (the world's modules, or `modules` you send).
+
+Each draws the scene from its starting viewpoint, or:
+- `at: [0, 10, 30, 60]` — a frame at each second; `state` — values over its starting state; `set` —
+  values set as it goes (`[[second, key, value, over?, ease?]]`, as a game sets them); `views` —
+  other cameras on each moment; `sheet: true` — all of them in one labelled picture (up to 32
+  frames). A sheet is the cheapest way to see a film move.
+- `film: {"from": 0, "to": 60, "fps": 10}` — that stretch as an MP4; `pack: {"at": [...]}` — the
+  frames as PNGs in a ZIP. Both are made in the background: you get a link at once, kept an hour,
+  that answers 202 while it is made and then the file.
+
+`on` says where it is drawn: `"server"` (the default — WebGL on the server's CPU: seconds a frame,
+and a film there is short, 120 frames at most) or `"gpu"` (a GPU, for heavy scenes and long films —
+up to 3000 frames). The GPU sleeps after 15 minutes unused: a call then wakes it and says so — ask
+again in a minute or two (a film or a pack waits for it by itself). Nothing falls back from one to
+the other.
+
 ## Rendering on your own machine
 
 `npm i -g @moood/render`, then `moood-render <world>/scenes/<folder> --at 0,2.5` — a scene of a
 cloned world rendered with moood's own engine (the version the site runs) in a Chromium you have,
 without the site: a PNG for each moment and the errors its code threw. Its README tells the rest.
+It draws WebGL in software: a single frame is quick, a long film is better made with `film` above.
 
 ## What a scene is
 
