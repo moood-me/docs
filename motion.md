@@ -5,6 +5,9 @@ recordings gives — getting up from a chair and walking to the window, a hand o
 makes: **NVIDIA Kimodo** (Kimodo-SOMA-RP-v1.1), a motion diffusion model trained on 700 hours of studio motion
 capture with human-written descriptions. The MCP tools:
 
+People in a scene play these motions: people.md (`people_guide`) — a motion goes into the world's cast with
+`put_motion`. A world's older people module plays them as clips (below).
+
 - `make_motion` — a motion from prompts, their seconds, constraints and the model's settings; made once and kept
   (the same ask is the same motion, at once). A new one takes the model a minute or two, minutes more when it has
   slept: then it answers `making` — ask the same again a minute later.
@@ -85,7 +88,9 @@ frame 0 (radians, 0: +z).
 
 ## What comes back
 
-A clip — an entry of a people module's data, as `dev/mocap` makes them from recordings: `{n, fps, v, p, c, r,
+Its key — for `look_at_motion`, and for `put_motion(world, key, name, branch)`: the motion written into the world's
+cast (its module's data, in your branch) as people in a scene play it (people.md). And a clip — an entry of an older
+people module's data, as `dev/mocap` makes them from recordings: `{n, fps, v, p, c, r,
 kind}` — bone directions relative to the body (no proportions), foot contacts, `r` the person's path over the
 floor as Kimodo made it (from where it starts, facing forward), `p` the pelvis from that path. Name it and put it
 into the module's data. The module plays it in place, at the figure's `at`; with `travel: true` the body goes
@@ -139,7 +144,9 @@ Everyone in every style, walking and sitting (one sheet a style):
 [flat](https://github.com/moood-me/docs/blob/main/people/shapes-flat.webp) · [body: clay](https://github.com/moood-me/docs/blob/main/people/body-clay.webp) · [flat](https://github.com/moood-me/docs/blob/main/people/body-flat.webp) ·
 [silhouette](https://github.com/moood-me/docs/blob/main/people/body-silhouette.webp). To see your own: `look_at_motion` with the look.
 
+In a scene, a person is an element with `person` and this very look (people.md); a world adds its own styles,
+characters, garments, parts and bodies there (its cast).
+
 What it can't do (yet): only people — two arms, two legs (Kimodo moves one human skeleton); children and old
-people move as adults do (it has no age); no foot placement on uneven ground; a figure of shapes' face doesn't
-move, a body's talks without words (its lips follow no voice). These figures are for looking at motions so far — a
-scene's people are still its module's (their clips, above).
+people move as adults do (it has no age); a figure of shapes' face doesn't move, a body's talks without words (its
+lips follow no voice).
