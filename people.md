@@ -23,7 +23,8 @@ Two people by a lamp — a figure of shapes and a body, lit by it, their shadows
 She stands and breathes, walks with her steps as long as the way she goes (her feet never slide), faces the way she
 goes, turns, does what she is told, and goes back to standing; she looks at what she is told to, reaches for it,
 holds what is hers. Her head is her point (`e.at`): her lines appear over it, `camera_target: "rosa"` frames her.
-Her points — `head`, `hand_r`, `hand_l`, `hands`, `chest`, `hips`, `shoulder_r`, `shoulder_l`, `foot_r`, `foot_l`, `feet` — are where they are now: `"rosa#hand_r"` is her
+Her points — `head`, `hand_r`, `hand_l`, `hands`, `chest`, `hips`, `shoulder_r`, `shoulder_l`, `foot_r`, `foot_l`, `feet`, and those of
+the parts she has with her (a torch's `flame`) — are where they are now, on her as she is drawn: `"rosa#hand_r"` is her
 right hand, for anyone to look at, reach for, aim a camera at — and for an element's code to paint at: `e.point("rosa#hand_r")`
 is where it is in that element's painting now (a glow in her palm, a thought by her head).
 
@@ -46,15 +47,15 @@ Their height and box come from their look (a child is small); no `code`, no `hei
 
 | key | what it is |
 |---|---|
-| `<id>_do` | what they do: a motion's name (`"sit"`), or `{"motion", "loop": true \| false, "from": seconds into it}`. A new value goes over from what they did in a third of a second. Looped: on the spot, on the motion's best loop (found by itself); not: played once, then held at its end — and it **ends where they stand, facing their turn**: the place and the turn are its end's (sitting down ends on the seat; where it begins is `stage.startOf`, and `go` takes them there) |
+| `<id>_do` | what they do: a motion's name (`"sit"`), or `{"motion", "loop": true \| false, "from": seconds into it, "going": true}`. A new value goes over from what they did in a third of a second. Looped: on the spot, on the motion's best loop (found by itself); not: played once, then held at its end — and it **ends where they stand, facing their turn**: the place and the turn are its end's (sitting down ends on the seat; where it begins is `stage.startOf`, and `go` takes them there). `going`: done once as they go — on the spot, their place carrying them on, in place of their gait while it plays (a stumble in the middle of a run), the gait back as it ends |
 | `<id>_turn` | where they face standing (degrees, as `person.turn`); they turn to it at a person's pace |
-| `<id>_look` | what they look at: an element's id (its point; a person's head), `"id#point"` (a person's point, an element's named point), or `[across, distance, elevation]` metres; `null` — ahead. The head and the neck turn to it, over the motion, no further than a head turns (70° aside, 40° up or down) |
-| `<id>_reach` | what their hands and feet reach for: `{"r": …, "l": …, "foot_r": …, "foot_l": …}`, each as `_look`'s; `null` — back to the motion's. A limb's reach (two bones): as far as it is long — a foot caught between stones, a hand on another's foot |
+| `<id>_look` | what they look at: an element's id (its point; a person's head), `"id#point"` (a person's point, an element's named point), or `[across, distance, elevation]` metres; `null` — ahead. The head and the neck turn to it, over the motion, as far as a head turns (70° aside, 40° up or down); further round — back over a shoulder — the waist and the chest turn the rest (up to 50° more), the hips going on as the motion has them |
+| `<id>_reach` | what their hands and feet reach for: `{"r": …, "l": …, "foot_r": …, "foot_l": …}`, each as `_look`'s; `null` — back to the motion's. A limb's reach (two bones): as far as it is long — a foot caught between stones, a hand on another's foot; a point past its end, straight toward it (arms along the sides of one lying in a coffin). Told to reach for another thing, the hand goes over to it from the one it held, in a moment (off the lid onto a friend's hand). Hand in hand: a hand reaching for another's hand (`"led#hand_l"`) that reaches back for it (`"guide#hand_r"`) — the two meet between, halfway from where their motions have them, raised to each other where one could not reach so far |
 | `<id>_with` | which of their parts they have with them now: `["guitar"]` (the cast's `parts`, drawn on them as they move); `null` — the look's own |
 | `<id>_wear` | their look's fields over it now (a figure of shapes): `{"barefoot": "right"}` — a shoe off (`left`, `right`, `both`), `{"hat": "none"}`; a whole other look of theirs (the boy years later: the cast's `david_teen` — as tall as it is); `null` — as it is |
-| `<id>_gait` | how they walk now: a motion of theirs that walks (`"carry_walk"`, `"climb"`, a walk backwards: they face the way it faces as it goes — backing away, pulling a door shut); `null` — the cast's |
+| `<id>_gait` | how they walk now: a motion of theirs that walks (`"carry_walk"`, `"climb"`, a walk backwards: they face the way it faces as it goes — backing away, pulling a door shut); `null` — the cast's. A new gait goes over from the one before in a third of a second (a run slowing into a walk) |
 | `<id>_steps` | `false`: moved as they are, no steps — sliding down a bank sitting, pushed, carried (a place that moves with them does not walk them) |
-| `<id>_on` | on another's arms: a point of theirs (`"mother#hands"`), or `{"at": "mother#hands", "up": -0.22}` (that much higher — lower: a big child held by the waist); their hips there as the other moves, turned as the other is (their `_turn` from it: 180 — facing them), no steps, not on the land. Or sat on a seat: `[across, distance, elevation]` — the top of a barrel, a wall, a high stool: their hips over it as high as a pelvis sits, turned as their own `_turn`, a seated motion of theirs doing the rest (legs hanging from a high one). `null` — on their feet; let down into a motion done once (off the barrel onto their feet), they go from where they were held to where it puts them as the motion goes from its first pose to its last |
+| `<id>_on` | on another's arms: a point of theirs (`"mother#hands"`), or `{"at": "mother#hands", "up": -0.22}` (that much higher — lower: a big child held by the waist); their hips there as the other moves, turned as the other is (their `_turn` from it: 180 — facing them), no steps, not on the land. Or sat on a seat: `[across, distance, elevation]` — the top of a barrel, a wall, a high stool: their hips over it as high as a pelvis sits, turned as their own `_turn`, a seated motion of theirs doing the rest (legs hanging from a high one). Or on a thing: an element's point (`"coffin_floor#bed"`, `"cart"`) — their floor there, their hips over it, going and turning with it (their `_turn` within its turn: lying in a coffin as it is carried, standing on a cart). `null` — on their feet; let down into a motion done once (off the barrel onto their feet), they go from where they were held to where it puts them as the motion goes from its first pose to its last |
 | `<id>_here` | `false`: not in the scene now — come later, gone (not drawn, no shadow); `true` by default |
 | `<id>_still` | `true`: they stop in time — the pose of that very moment held (in the middle of a step, if they were walking), no breath, the cloth hanging as it hung; `false`: they go on from it |
 | `<id>_mood` | a body's face: an expression (`smile`, `sad`, `angry`, `surprised`, `thinking`… — motion.md) |
@@ -67,7 +68,7 @@ A game sets these as it sets any key. A script has `scene.person(id)`:
 
 | | |
 |---|---|
-| `.do(motion, {loop, from})` | what they do (again, if it is the same: it starts over) |
+| `.do(motion, {loop, from, going})` | what they do (again, if it is the same: it starts over) |
 | `.walk([[across, distance], …], {speed})` | along the points (metres, at `speed` m/s — 1.3), facing the way, and stays facing so; returns its seconds |
 | `.go(motion, {to \| from: [across, distance], turn, speed})` | a motion done once that ends at `to` (or begins at `from`) facing `turn` at its end: they walk to where it begins, turn as it begins, and do it; returns its seconds till it begins. `go('sit_down', {to: SEAT, turn: 180})` — onto the seat; `go('rise', {from: SEAT})` — up out of it |
 | `.turn(degrees, over?, ease?)` | where they face standing |
@@ -109,6 +110,8 @@ return {
     characters: { lady: { from: 'lady', body: { height: 0.9 } } },
     garments: { cloak: { name: 'плащ', hang: [{ to: 1.6, from: 'shoulders', flare: 0.35, ragged: true }], sleeves: 'garment' } },
     hair: { curls: { name: 'кудри', draw: F => { /* F.head, F.ball… (below) */ } } },
+    // a part may name its points: { torch: { points: { flame: { joint: 'LeftHand', off: [0.08, 0, 0], rise: 0.33 } }, draw } }
+    // — off that joint along its axes ([side, up, forward] metres of a man's 1.76 m) and `rise` straight up: "keeper#flame"
     parts: { satchel: { name: 'сумка', draw: F => {        // a bag in her right hand: where the hand is, as it turns
       const { add, mul } = MooodShapes.V, hand = F.P('RightHand'), axes = [F.side('RightHand'), F.up('RightHand'), F.fwd('RightHand')];
       F.ball(add(hand, mul(axes[1], -0.1 * F.k)), axes, [0.05, 0.09, 0.11].map(v => v * F.k), F.colors.accent, 14);
@@ -167,6 +170,9 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
   seated loop of yours. Sitting down: `go('sit_down', {to: SEAT, turn: 180})`, then, when it ends, `do('seated')`
   looped. Up: `go('rise', {from: SEAT})` — it ends where the getting up takes them. Make the motions so: one sits
   down and ends still; one starts seated and ends standing.
+- **Hand in hand** (leading someone out, walking together). Each reaches for the other's hand — `guide_reach: {r: "led#hand_l"}`,
+  `led_reach: {l: "guide#hand_r"}` — and they meet between as the two walk (a step apart: the hands raised to each other
+  as far as both arms reach); `null` both to let go. Drawn back the other way, a walk backwards as their `gait`.
 - **A handshake, a touch.** `reach` the hand to the other's point (`"guest#hand_r"`), the other's hand out to a
   point between them (`[across, distance, 1.0]`); a motion of the hands meeting under it gives the grip.
 - **Looking.** `look('rosa')`, `look([-3, 10.4, 2.9])` — a portrait high on a wall; with a motion that keeps the
@@ -176,6 +182,12 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
   when it is laid down — the scene's own guitar element hides while it is theirs (its code reads `<id>_with`).
 - **A beat as long as its people.** A row a beat ends on must be there: `[10.6, () => {}]` holds it while they
   finish what they do.
+- **Running, stumbling.** A run of the cast's as their `gait` (`"flee"`): as fast as their place goes, the steps as many
+  as the way gone — a place a game moves frame by frame runs them too. A stumble as they run: `do('stumble', {loop:
+  false, going: true})` — the place goes on, the stumble is played over it; they run on as it ends. Slowing to a stop:
+  the gait back to the walk (`gait(null)`) as the pace drops.
+- **Running hand in hand.** Both hands to the one point between them (`[across, distance, 1.0]`, set as their places
+  move — `scene.on('move', …)`), a stride apart at most: arms are as long as they are.
 - **A crowd.** Several elements, each its own id and look; start them a little apart in time (`scene.after(i *
   0.3, …)`) and speed (`walk(…, {speed: 1.2 + 0.1 * i})`) — never in step.
 - **Inside, by a lamp.** `"inside": true` on them as on the room; the lamp's light falls on the side facing it.
@@ -186,7 +198,8 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
 - **A painted room** (a scene that lays no light itself: its art is its light). Give it `lights` — sources where
   its candles and windows are (`{"of": "candles", "reach": 6}`, a window's colour and strength, `on` a key) — and
   `light.people` (the light all round them, 0…1, `ambientColor` its colour): they are lit by the two strongest at
-  their chest, by how they face them; a silhouette style rimmed by them. Sun or moonlight through its windows: a
+  their chest, by how they face them; a silhouette style rimmed by them — and, as the light all round grows towards daylight (`light.people`, a look of it by
+  day), showing its colours through the silhouette. Sun or moonlight through its windows: a
   light from far off (`from`) with `through` — the windows' panes, polygons of `[across, elevation, distance]` —
   lights only who stands in its shafts.
 - **On a slope, on steps.** A `relief`: they touch the land where the motion touches its floor — standing, walking: the
@@ -202,6 +215,15 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
 - **On a high seat.** `on([across, distance, top])` with a seated loop (a boy on a barrel, legs hanging); off it: `on(null)`
   and, in the same moment, a motion done once that gets down (sitting on a table, slides forward onto the feet) — from
   the seat to the floor as it goes.
+- **Lying in a coffin, carried in it.** The coffin built of cards and planes on an unseen anchor (its walls, its floor, its lid
+  on it: what is in it hidden by its walls, point by point); she `on` a point of its floor, a lying motion done once (no
+  breath), her limbs reaching on toward its foot (`reach` to points it marks there: arms along her sides, feet together).
+  Her gown lies along her (a body lying wears its garment as standing, laid down with it; what would be below the floor
+  lies on it; long hair too). The bearers' hands `reach` for the corners of its ends (points its walls mark), a carrying
+  walk their `gait` (one walks backwards); the coffin's place and turn moved along the way, they a step off its ends.
+- **A thing slid by the hands on it.** A lid on the coffin moved by its own key; his hands `reach` for points it marks;
+  he steps with it — a sidestep as his `gait` (a walk sideways: facing as he faced), the lid's key and his place in one
+  path.
 - **A lantern in the hand.** A part of the cast drawn in the hand, and a light of the scene `"at": "keeper#hand_r"` (its
   `on` a key: out when it is dropped); a glow in someone's head — the same at `"#head"`.
 - **A tool at its work.** A smith's blow lands where his motion's hand comes down: stand them so (measure where the
