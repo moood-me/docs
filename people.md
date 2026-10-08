@@ -254,6 +254,6 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
 now and the one it goes over from, a loop's seam crossfaded, the walk mixed in by the speed their place moves, its
 phase by the way gone; the feet set on the relief (a two-bone reach). Each frame they are drawn by shapes.js or
 figure.js into a texture of their own (ink.js: depth, lines, and how each pixel faces and how far it is), laid as
-their element's card by gl.js — each pixel as deep as it is in the depth buffer, the scene's light laid on it by how
+their element's card by world.js — each pixel as deep as it is in the depth buffer, the scene's light laid on it by how
 it faces. Their painting is a silhouette (Canvas 2D, picking). Motions: the motion service's `/person` (rotations,
 the pelvis's place); the engine's own in `web/scene/people/`.
