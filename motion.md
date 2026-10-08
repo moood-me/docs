@@ -117,7 +117,7 @@ flat or in two tones, in depth.
   clothes, hair and colours of their own; anything below overrides them.
 - `garment` — `none` (a shirt and trousers), `tunic`, `coat`, `dress`, `robe`, `apron`, `jacket`, `skirt`,
   `sailor`; `hood`, `scarf`, `socks` — true or false; `hair` — `none`, `short`, `long`, `bun`, `bob`,
-  `straight`, `ponytail`, `spiky`; `hat` — `none`, `cap`, `hat`; `face` — `none`, `simple`, `dot`.
+  `straight`, `ponytail`, `spiky`; `hat` — `none`, `cap`, `hat`; `face` — `none`, `simple` (eyes, brows, nose, mouth: at rest, or with an `expression` — the names a minimal face has, below; `<id>_mood` in a scene), `dot`.
 - `paint` — `silhouette`, `rim` (a silhouette with a rim of light), `flat`, `toned`, `clay`, `lit` (flat
   colours under the scene's light); `line` — outlines, true or false; `ground` — the light and background:
   `studio`, `fog`, `night`, `dusk`, `day`, `paper`, `sunset`, `lamp`, `mist`.
@@ -148,5 +148,5 @@ In a scene, a person is an element with `person` and this very look (people.md);
 characters, garments, parts and bodies there (its cast).
 
 What it can't do (yet): only people — two arms, two legs (Kimodo moves one human skeleton); children and old
-people move as adults do (it has no age); a figure of shapes' face doesn't move, a body's talks without words (its
+people move as adults do (it has no age); a figure of shapes' face shows an expression but does not talk, a body's talks without words (its
 lips follow no voice).

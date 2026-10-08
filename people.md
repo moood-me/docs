@@ -77,7 +77,7 @@ A game sets these as it sets any key. A script has `scene.person(id)`:
 | `.look(at)`, `.reach({r, l, foot_r, foot_l})`, `.with(parts)`, `.wear(fields)`, `.gait(motion)`, `.on(point)`, `.here(yes)`, `.still(on)` | as the keys |
 | `.walk(points, {speed, steps: false})` | moved along the points as they are, no steps (sliding); steps again at the end |
 | `.startOf(motion, turn)` | where that motion done once begins, from where it ends — what a script needs to know where they will be |
-| `.mood(expression)`, `.talk(on)` | a body's face |
+| `.mood(expression)`, `.talk(on)` | the face: its expression (a body's, or a figure of shapes' face `simple`); talking — a body's |
 
 `stage.startOf(id, motion, turn)` — where a motion done once begins, from where it ends: `{across, distance, turn}`.
 
@@ -263,7 +263,7 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
 - Kimodo's "sitting" is often a chair: ask for "sits on the floor with the knees drawn up / the legs stretched out
   in front" and check the pelvis's height (a chair's ~0.55 m, the floor's ~0.15 m) before using it. Children move as
   small adults; "carrying a child" comes with the arms held out — lower the child with `on`'s `up`.
-- A figure of shapes' face doesn't move; a body's mouth talks without words (it follows no voice).
+- A figure of shapes' face (`simple`) takes an expression (`<id>_mood`) but does not talk; a body's mouth talks without words (it follows no voice).
 - Without WebGL2 (an old browser) people are drawn as flat silhouettes.
 
 ## How it is made (if you need it)
