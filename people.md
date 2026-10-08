@@ -212,7 +212,7 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
   `light.people` (the light all round them, 0…1, `ambientColor` its colour): they are lit by the two strongest at
   their chest, by how they face them; a silhouette style rimmed by them — and, as the light all round grows towards daylight (`light.people`, a look of it by
   day), showing its colours through the silhouette. Sun or moonlight through its windows: a
-  light from far off (`from`) with `through` — the windows' panes, polygons of `[across, elevation, distance]` —
+  light from far off (`from`) with `through` — the windows' panes: a window element's id, or a polygon of `[across, elevation, distance]` —
   lights only who stands in its shafts.
 - **On a slope, on steps.** A `relief`: they touch the land where the motion touches its floor — standing, walking: the
   feet on it; sitting, kneeling, lying, leaning on a hand: the body laid along the slope under what touches it (sliding
