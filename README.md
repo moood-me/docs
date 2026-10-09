@@ -16,8 +16,15 @@ change.
   code. `world_repo(address)` (an MCP tool) gives you the clone URL and a token for that repository
   alone (an hour; ask again for another).
 
-Both lead to the same place: a world lives in its repository. Its `main` is the world; every
-change of a scene there is a new version of it; nothing is ever lost.
+Both lead to the same place: a world lives in its repository. Each deployment of moood has a
+branch of its own there — `env/dev` is moood's own, `env/<computer>/<stack>` a stack on someone's computer;
+there is no `main`. The deployment's branch is the world, for that deployment: every change of a
+scene there is a new version of it; nothing is ever lost. `world_repo` says which branch is the
+deployment's you work with (`branch`). A deployment's branch follows another's — usually moood's
+own — while it has nothing of its own: it moves on with it, and once all it had is there too
+(merged, squashed — however), it goes on following. What it has of its own reaches another
+deployment only when you merge it there; so agents on different deployments see each other's work
+through the one they follow.
 
 ## The repository
 
@@ -49,7 +56,7 @@ when you change the module. A scene lists the modules it uses in `scene.json` (`
 ["people"]`) and gets them as `e.kit.people` in its elements' code (`scene.kit.people` in scripts,
 `kit.people` in its lib).
 
-Every scene shows the modules as `main` has them now: a change of a module reaches every scene that
+Every scene shows the modules as the world has them now: a change of a module reaches every scene that
 uses it, at once — it is a new version of the world, not of those scenes (a scene's versions are
 the changes of its own folder; an old version opens with the modules as they were then). So before
 you merge a change of a module, look at the scenes that use it (`look_at_branch`), not only at the
@@ -78,15 +85,18 @@ the way the scene format asks.
 
 1. `world_repo(address)` → clone with the git arguments it gives (the token travels in a header —
    never put it into a URL or a credential store).
-2. Make a branch of your own. **Never push to `main`.**
+2. Make a branch of your own, begun from the deployment's (`branch`). **Never push to a
+   deployment's branch (`env/…`).**
 3. Change files; commit and push your branch as often as you like.
 4. `look_at_branch(address, branch, folder)` shows a scene of your branch rendered, with the errors
    its code throws (moments, sheets, films: Looking at your work, below). Look at your work: does it
    show what was asked, and is it beautiful?
 5. `merge_branch(address, branch, note)` puts the branch into the world: each scene it changed gets
    a new version, a new folder a new scene. It is refused — nothing changes — if the branch changes
-   a scene the person may not change, leaves a folder that isn't a scene, or conflicts with `main`
-   (merge `main` into your branch, push, try again). The branch is deleted once merged.
+   a scene the person may not change, leaves a folder that isn't a scene, or conflicts with the
+   deployment's branch (merge that into your branch, push, try again). The branch is deleted once
+   merged. To bring work of one deployment into another, push a branch begun from the other one's
+   and merge it there — through that deployment's MCP.
 
 moood formats the code it writes (Biome: 2 spaces, 120 columns); write your code readably too, one
 statement a line.
@@ -95,10 +105,12 @@ statement a line.
 
 A game played on worlds has a repository of its own, `<space>--game--<slug>`: `game.json` (its
 type, title, description, genres, the world it is played on — that world's repository — and the
-scenes it takes in, `{world, folder, version}`) and a folder of its type (`moood/agents.json`, what
+scenes it takes in, `{world, folder}`) and a folder of its type (`moood/agents.json`, what
 the agents are told; `asked/story.json`, the story; `bespoke/`, the game's own code — `game.js` and
-what it imports) that only that game type reads. Its versions are
-the commits of its `main`; a play keeps the game's version and the world's it began on.
+what it imports) that only that game type reads. Like a world's, it has a branch for each
+deployment (`game_repo` says which); its versions are the commits of that branch. A play keeps the
+commits it began on — the game's and its worlds' (an asked game's scenes: as their worlds were when
+it began).
 
 Through the MCP: `list_games`, `create_game`, `read_game` (game.json and its type's files),
 `change_game` (title, description, genres, who sees it), `write_game_file` (one file of its type —
