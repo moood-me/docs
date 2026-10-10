@@ -146,6 +146,9 @@ up to 3000 frames). The GPU sleeps after 15 minutes unused: a call then wakes it
 again in a minute or two (a film or a pack waits for it by itself). Nothing falls back from one to
 the other.
 
+`engine: "<branch>"` — drawn by the engine a pushed branch of moood's own repository has (its `moood/web`), not the
+site's: for the engine's own developers — commit and push the engine change, name the branch; on either `on`.
+
 ## Rendering on your own machine
 
 `npm i -g @moood/render`, then `moood-render <world>/scenes/<folder> --at 0,2.5` — a scene of a
@@ -153,7 +156,7 @@ cloned world rendered with moood's own engine (the version the site runs) in a C
 without the site: a PNG for each moment and the errors its code threw. Its README tells the rest.
 It draws WebGL in software: a single frame is quick, a long film is better made with `film` above.
 (`--server` draws on moood's GPU with an engine sent from a checkout of moood itself — for the engine's own
-developers; a world's scenes are drawn by the site's engine with the tools above.)
+developers, as the tools above do with `engine`; a world's scenes are drawn by the site's engine.)
 
 ## What a scene is
 
