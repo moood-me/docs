@@ -95,4 +95,5 @@ habit of yours disagree, the rule wins.
 (p99 ≤ 6 ms); in a settled frame zero repaints and zero uploads; GPU ≤ 8 ms; no GC pause over 2 ms; the page's main
 thread ≤ 1 ms a frame, no task over 50 ms; open to a ready frame ≤ 2 s; a prepared cut ≤ 1 frame late; input seen
 the next frame. A scene made by these principles passes; one that doesn't, isn't done. `measure_scene` measures it
-and says which hold.
+and says which hold; when the GPU's time is over, its report's "by pass" lines (and, on a scene's page, the P key's
+panel) say which pass of the frame it goes to.
