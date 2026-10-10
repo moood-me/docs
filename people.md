@@ -13,21 +13,31 @@ move is the scene's **state**: where they stand (the element's `place`), what th
 
 ```js
 // the scene's script: she walks to the lamp, turns to us, waves (a motion of the world's cast)
-const s = scene.person('rosa').walk([[0.2, 4.2]]);
-scene.after(s, () => { scene.person('rosa').turn(180, 0.8); scene.person('rosa').do('wave'); });
+scene.sequence(async s => {
+  const rosa = s.person('rosa');
+  await rosa.walk([[0.2, 4.2]]);
+  await rosa.turn(180);
+  await rosa.do('wave');
+});
 ```
+
+This is engine 2's (a scene with `"engine": 2` — every new scene): what people do are actions of the scene's director
+— each takes as long as it truly takes, and what follows waits for it (`scene_format`: Scripts and the director). A
+scene made for the old engine (no `"engine": 2`) says the same through its keys and seconds: `scene.person(id).walk(…)`
+returns its seconds, `scene.after(seconds, …)` goes on (`scene_format(engine=1)`).
 
 Two people by a lamp — a figure of shapes and a body, lit by it, their shadows cast:
 [people/scene-lamp.webp](https://github.com/moood-me/docs/blob/main/people/scene-lamp.webp).
 
-She stands and breathes, walks with her steps as long as the way she goes (her feet never slide), faces the way she
-goes, turns, does what she is told, and goes back to standing; she looks at what she is told to, reaches for it,
+She stands and breathes, walks at her gait's own pace (the motion played at the speed it was made — never faster or
+slower; her feet never slide), faces the way she goes, turns, does what she is told, and goes back to standing; she looks at what she is told to, reaches for it,
 holds what is hers. Her head is her point (`e.at`): her lines appear over it, `camera_target: "rosa"` frames her.
 Her points — `head`, `hand_r`, `hand_l`, `hands`, `chest`, `hips`, `shoulder_r`, `shoulder_l`, `back`, `nape`, `foot_r`, `foot_l`, `feet`, and
 those of the parts she has with her (a torch's `flame`) — are where they are now, on her as she is drawn: `"rosa#hand_r"` is her right hand, for anyone to look at, reach for, aim a camera at (`back` — between
 her shoulder blades, where arms round her hold; `nape` — behind her neck, where hands round it meet) — and for an
-element's code to paint at: `e.point("rosa#hand_r")` is where it is in that element's painting now (a glow in her palm, a
-thought by her head, a book's point at the reader's hands, a rope from a hand to a calf's halter).
+element to follow: `e.point("rosa#hand_r")` in its `animate` is where it is in that element's painting now (a glow in
+her palm, a thought by her head, a book's point at the reader's hands, a rope from a hand to a calf's halter — a layer
+moved there each frame; the old engine's painting reads it so).
 
 ## The element
 
@@ -66,13 +76,17 @@ full length); no `code`, no `height`, no `box`.
 
 A cut (`scene.cut`: a new shot) finds them where it puts them: set there in it, they do not walk there — doing what it says, turned as it turns them, looking and reaching at what it says, nothing going over from before it.
 
-A game sets these as it sets any key. A script has `scene.person(id)`:
+A game sets these as it sets any key — or acts through the director (engine 2: `MooodState.act(id, 'walk', points)` …,
+awaitable). A script has `scene.person(id)` — in engine 2 each verb that takes time is an action (awaitable; `ending`,
+`cancel`, `pause`, `resume`), on the person's own track (a new walk replaces the one going, from where they are):
 
 | | |
 |---|---|
 | `.do(motion, {loop, from, going})` | what they do (again, if it is the same: it starts over) |
-| `.walk([[across, distance], …], {speed})` | from where they stand (their place's keys — not set yet, the element's own across and distance) along the points (metres, at `speed` m/s — 1.3), facing the way, and stays facing so; returns its seconds |
-| `.go(motion, {to \| from: [across, distance], turn, speed})` | a motion done once that ends at `to` (or begins at `from`) facing `turn` at its end: they walk to where it begins, turn as it begins, and do it; returns its seconds till it begins. `go('sit_down', {to: SEAT, turn: 180})` — onto the seat; `go('rise', {from: SEAT})` — up out of it |
+| `.walk([[across, distance], …], {speed, gait})` | from where they stand (their place's keys — not set yet, the element's own across and distance) along the points (metres), facing the way, and stays facing so — at their gait's own pace (engine 2; `speed` only for a gait made for it); done as they arrive (the old engine: at `speed` m/s, 1.3; returns its seconds) |
+| `.go(motion, {to \| from: [across, distance], turn, speed})` | a motion done once that ends at `to` (or begins at `from`) facing `turn` at its end: they walk to where it begins, turn as it begins, and do it — done as it is (the old engine: returns its seconds till it begins). `go('sit_down', {to: SEAT, turn: 180})` — onto the seat; `go('rise', {from: SEAT})` — up out of it |
+| `.do(motion, {loop, from, going})` | engine 2: done once, done as long as the motion is; looped — at once (what they do from now) |
+| `.say(text, {voice, how, who})` | engine 2: the line over them, in their voice, done as it has been heard |
 | `.turn(degrees, over?, ease?)` | where they face standing |
 | `.look(at)`, `.reach({r, l, foot_r, foot_l})`, `.with(parts)`, `.wear(fields)`, `.gait(motion)`, `.on(point)`, `.here(yes)`, `.still(on)` | as the keys |
 | `.walk(points, {speed, steps: false})` | moved along the points as they are, no steps (sliding); steps again at the end |
@@ -113,7 +127,8 @@ return {
     garments: { cloak: { name: 'плащ', hang: [{ to: 1.6, from: 'shoulders', flare: 0.35, ragged: true }], sleeves: 'garment' } },
     hair: { curls: { name: 'кудри', draw: F => { /* F.head, F.ball… (below) */ } } },
     // a part may name its points: { torch: { points: { flame: { joint: 'LeftHand', off: [0.08, 0, 0], rise: 0.33 } }, draw } }
-    // — off that joint along its axes ([side, up, forward] metres of a man's 1.76 m) and `rise` straight up: "keeper#flame"
+    // — off that joint along its axes ([side, up, forward] metres of a man's 1.76 m) and `rise` straight up: "keeper#flame";
+    // or its draw marks it where it draws it — F.point('candle', centre) (below): a point on what is held between the hands
     parts: { satchel: { name: 'сумка', draw: F => {        // a bag in her right hand: where the hand is, as it turns
       const { add, mul } = MooodShapes.V, hand = F.P('RightHand'), axes = [F.side('RightHand'), F.up('RightHand'), F.fwd('RightHand')];
       F.ball(add(hand, mul(axes[1], -0.1 * F.k)), axes, [0.05, 0.09, 0.11].map(v => v * F.k), F.colors.accent, 14);
@@ -142,16 +157,18 @@ is made from, ours or the world's, its own fields over it):
 `draw(F)` draws on the figure being made, as ours do (all of ours are made so — shapes.js shows them):
 `F.look`, `F.style`, `F.colors` (each `[r, g, b, toned]`; a part's own colour may say, as its fourth, `2` — it glows: its own
 colour whatever the paint and the light, a lamp's glass, a flame — or `3` — in colours on a silhouette: a book's pages in
-a candle's light on someone drawn as a shadow), `F.fit.h` (height), `F.k` (thickness), `F.sides`;
+a candle's light on someone drawn as a shadow), `F.fit.h` (their height as a share of a man's 1.76 m — a man's metre at their size: a length of a man's `x` metres is `x * F.fit.h`; not metres), `F.k` (thickness, the same way), `F.sides`;
 the joints — `F.P(name)` (where; SOMA's names: Hips, Spine1, Chest, Neck1, Head, LeftArm, LeftForeArm, LeftHand,
 LeftLeg, LeftShin, LeftFoot… motion.md), `F.fwd(name)`, `F.side(name)`, `F.up(name)` (its axes); the head —
 `F.head {at, axes, egg, r, out, sides, square, on(direction, out)}`; the trunk's sections `F.trunk(scale)`,
 `F.ringOf(section, n, square)`; what is worn round the chest `F.worn`; `F.clear(point, ±1, r)` (kept before or
-behind what is worn); `F.swing(name, target, stiffness)` (a point following, a little late: hanging things); and
+behind what is worn); `F.swing(name, target, stiffness)` (a point following, a little late: hanging things); `F.keep(make)` — what a draw keeps from one frame to the next (its lists, its sizes: `make(F)` once a figure, the same object after — a part drawn each frame, a lantern held, makes nothing anew); `F.point(name, at)` — a part's point where it is drawn (`at`: a position as F's others), the person's `#name` point like the others (a light's `at`, a look, a reach, the camera; both engines); and
 the solids — `F.ball(c, axes, radii, colour, sides, square?)`, `F.cap(c, axes, radii, direction, edge, colour,
 sides, square?)`, `F.tube(points, profile, colours, sides, hint, flat?, square?, cut?)`, `F.bar(a, b, ra, rb, colours,
 sides, hint, flat?, square?)`, `F.shell(c, axes, radii, edge(a), flare, colour, sides, square?)`, `F.rings(rings,
-colours, first?, last?)`. Vectors: `MooodShapes.V` (`add, sub, mul, dot, cross, mix, unit, level, mean`).
+colours, first?, last?)`; a sheet hanging as cloth — `F.cloth(rows, colour, held?)`: rows of points across it, top down,
+the first `held` (1) going with the trunk, the rest cloth hanging from them (an apron: over the thighs sitting, swinging
+as they go; only in what is worn from the start — a garment, the look's parts). Vectors: `MooodShapes.V` (`add, sub, mul, dot, cross, mix, unit, level, mean`).
 
 **A body** — the cast's `bodies`, `garments`, `outfits`; a look's `who` may name a cast body, `outfit` a cast outfit
 (its `wear` from the inside out: shoes, a bottom, a top, an apron, then hair — ours and the cast's), `hair` a cast
@@ -200,8 +217,8 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
   the gait back to the walk (`gait(null)`) as the pace drops.
 - **Running hand in hand.** Both hands to the one point between them (`[across, distance, 1.0]`, set as their places
   move — `scene.on('move', …)`), a stride apart at most: arms are as long as they are.
-- **A crowd.** Several elements, each its own id and look; start them a little apart in time (`scene.after(i *
-  0.3, …)`) and speed (`walk(…, {speed: 1.2 + 0.1 * i})`) — never in step.
+- **A crowd.** Several elements, each its own id and look; start them a little apart in time (a sequence each, a
+  `s.wait(scene.random() * 0.6)` first) — their statures and gaits give each their own pace: never in step.
 - **Inside, by a lamp.** `"inside": true` on them as on the room; the lamp's light falls on the side facing it.
 - **At a table under its lamp.** The table top a plane with `"shadow": {"light": "lamp", …}` (`"onto": []` if it is to darken
   nothing painted): those sitting at it are shadowed by it where it stands between them and the lamp — their knees and
@@ -212,7 +229,7 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
   `light.people` (the light all round them, 0…1, `ambientColor` its colour): they are lit by the two strongest at
   their chest, by how they face them; a silhouette style rimmed by them — and, as the light all round grows towards daylight (`light.people`, a look of it by
   day), showing its colours through the silhouette. Sun or moonlight through its windows: a
-  light from far off (`from`) with `through` — the windows' panes: a window element's id, or a polygon of `[across, elevation, distance]` —
+  light from far off (`from`) with `through` — the windows' panes: a window element's id, or a polygon of `[across, distance, elevation]` (engine 2; the old engine: `[across, elevation, distance]`) —
   lights only who stands in its shafts.
 - **On a slope, on steps.** A `relief`: they touch the land where the motion touches its floor — standing, walking: the
   feet on it; sitting, kneeling, lying, leaning on a hand: the body laid along the slope under what touches it (sliding
@@ -256,17 +273,22 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
 
 - People only: Kimodo moves one human skeleton (no animals, no four legs). Children and old people move as adults do.
 - A motion's way over the floor is left out (above): steps somewhere are a walk, not a motion.
-- One walk (the cast's `gait`): the stride stays the motion's, its cadence follows the speed — a run is a motion of
-  its own pace.
+- One walk (the cast's `gait`): engine 2 plays it at its own pace, its stride and cadence the motion's — a run, a
+  slow walk are motions of their own; a place a game moves faster or slower than any gait is moved without steps
+  (`steps: false`) or is said as a warning. (The old engine stretched the cadence to the speed.)
 - Nobody looks or reaches by themselves: the script says at what (`look`, `reach`). A reach is a limb's: no
   leaning to get further.
 - Kimodo's "sitting" is often a chair: ask for "sits on the floor with the knees drawn up / the legs stretched out
   in front" and check the pelvis's height (a chair's ~0.55 m, the floor's ~0.15 m) before using it. Children move as
   small adults; "carrying a child" comes with the arms held out — lower the child with `on`'s `up`.
 - A figure of shapes' face (`simple`) takes an expression (`<id>_mood`) but does not talk; a body's mouth talks without words (it follows no voice).
-- Without WebGL2 (an old browser) people are drawn as flat silhouettes.
+- Without WebGL2 (an old browser) people of an old-engine scene are drawn as flat silhouettes; engine 2 needs WebGL2.
 
 ## How it is made (if you need it)
+
+Engine 2: `web/scene2/people/` — each person a skinned mesh in the scene (their look's figure of shapes or body, its
+garments and loose cloth), posed once a frame by the motion player into their bones, lit, shadowed and mirrored with
+everything else; lines drawn over them on the screen. The old engine:
 
 `web/scene/people.js`: a person's player mixes their motions on Kimodo's 77-joint skeleton (skeleton.js) — the act
 now and the one it goes over from, a loop's seam crossfaded, the walk mixed in by the speed their place moves, its

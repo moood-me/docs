@@ -32,7 +32,10 @@ through the one they follow.
     scenes/<folder>/scene.json         a scene: its spec without its code
     scenes/<folder>/elements/<id>.js   an element's code          (objects[].code in the spec)
     scenes/<folder>/elements/<id>.script.js   an element's script (objects[].script)
+    scenes/<folder>/elements/<id>.animate.js  what moves it each frame (objects[].animate — engine 2)
+    scenes/<folder>/elements/<id>.glsl  its own shader            (objects[].shader — engine 2)
     scenes/<folder>/script.js          the scene's script          (spec.script)
+    scenes/<folder>/showcase.js        its own scenario outside games (spec.showcase — engine 2)
     scenes/<folder>/lib.js             code its elements share      (spec.lib)
     scenes/<folder>/relief.js          the land's shape            (spec.relief)
     scenes/<folder>/widgets/<id>.html  a widget's markup           (widgets[].html)
@@ -149,10 +152,18 @@ the other.
 cloned world rendered with moood's own engine (the version the site runs) in a Chromium you have,
 without the site: a PNG for each moment and the errors its code threw. Its README tells the rest.
 It draws WebGL in software: a single frame is quick, a long film is better made with `film` above.
+(`--server` draws on moood's GPU with an engine sent from a checkout of moood itself — for the engine's own
+developers; a world's scenes are drawn by the site's engine with the tools above.)
 
 ## What a scene is
 
 `scene-format.md` — the scene's language and its craft: the schema, the elements, how they are
-drawn and animated, state, the camera, light. It is the text moood's own artist works from: where
-it says to answer with a JSON object, you write the files instead. The MCP tool `scene_format`
-returns the same text.
+painted and moved, state and the director (actions, sequences, events), the showcase, the camera,
+light. It is the text moood's own artist works from: where it says to answer with a JSON object, you
+write the files instead. The MCP tool `scene_format` returns the same text.
+
+Two engines run scenes. Every new scene is engine 2's (`"engine": 2` in its `scene.json`): painted
+once per state, everything that moves moved on the GPU, driven by events — `scene-format.md`. A scene
+made before, without `"engine": 2`, runs on the old engine in its own older language —
+`scene-format-1.md` (`scene_format(engine=1)`) — until it is rewritten for engine 2 (then all of it:
+its paintings static, its motion by layers, animate and the director). How to move one: `engine2-porting.md`.
