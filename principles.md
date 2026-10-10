@@ -39,6 +39,9 @@ habit of yours disagree, the rule wins.
   moved by `animate`, an element's own shader, particles, people, light. A key a painting reads that changes every
   frame repaints every frame — never. A painting that keeps repainting gets a warning: it means this rule is
   broken.
+- **What happens must be seen.** People, faces and the action read clearly in every frame — at night and in dark
+  rooms too: keep the mood by colour and contrast (pools of light, rims, moonlight), not by hiding people in the
+  dark. An older version of a scene is not the measure of darkness — some were too dark; be bolder than they were.
 - **Light is the engine's.** Paint in daylight colours; the scene's light lays the look (time of day, lamps,
   rims, the haze after the light — linear: old look numbers come out darker, tune them on renders). Don't paint
   pools, rims, halos or the hour into pictures; a lamp's halo is its light plus the haze's glow.
