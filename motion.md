@@ -118,7 +118,8 @@ flat or in two tones, in depth.
 - `garment` — `none` (a shirt and trousers), `tunic`, `coat`, `dress`, `robe`, `apron`, `jacket`, `skirt`,
   `sailor`; `hood`, `scarf`, `socks` — true or false; `hair` — `none`, `short`, `long`, `bun`, `bob`,
   `straight`, `ponytail`, `spiky`; `hat` — `none`, `cap`, `hat`; `face` — `none`, `simple` (eyes, brows, nose, mouth: at rest, or with an `expression` — the names a minimal face has, below; `<id>_mood` in a scene), `dot`.
-- `paint` — `silhouette`, `rim` (a silhouette with a rim of light), `flat`, `toned`, `clay`, `lit` (flat
+- `paint` — `silhouette`, `rim` (a silhouette with a rim of light: in a scene, dark where little light reaches it,
+  its lit side showing its colours as the light on it grows, its edge rimmed by the lights beside it), `flat`, `toned`, `clay`, `lit` (flat
   colours under the scene's light); `line` — outlines, true or false; `ground` — the light and background:
   `studio`, `fog`, `night`, `dusk`, `day`, `paper`, `sunset`, `lamp`, `mist`.
 - `body` — proportions as factors of a man's: `height`, `head`, `neck`, `shoulders`, `arms`, `hips`, `legs`,

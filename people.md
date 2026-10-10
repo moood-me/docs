@@ -220,6 +220,10 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
 - **A crowd.** Several elements, each its own id and look; start them a little apart in time (a sequence each, a
   `s.wait(scene.random() * 0.6)` first) — their statures and gaits give each their own pace: never in step.
 - **Inside, by a lamp.** `"inside": true` on them as on the room; the lamp's light falls on the side facing it.
+- **A silhouette in a lit scene** (a style painted `rim`; a body's `silhouette`): dark where little light reaches it; where
+  more does — a window's shaft, a lamp near — its colours come through on the side lit (the body's silhouette stays its
+  one dark colour), and its edge is rimmed by the lights beside and behind it: crossing a shaft it shows its lit side and
+  rim, in the dark between it is a shadow again.
 - **At a table under its lamp.** The table top a plane with `"shadow": {"light": "lamp", …}` (`"onto": []` if it is to darken
   nothing painted): those sitting at it are shadowed by it where it stands between them and the lamp — their knees and
   legs under it dark, their chests and faces lit (a painted room: the planes casting a light's shadows stand between it
