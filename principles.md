@@ -94,4 +94,5 @@ habit of yours disagree, the rule wins.
 60 fps (p95 ≤ 16.7 ms, worst ≤ 33 ms) — playing, zooming, dragging; the engine's and the scene's JS ≤ 3 ms a frame
 (p99 ≤ 6 ms); in a settled frame zero repaints and zero uploads; GPU ≤ 8 ms; no GC pause over 2 ms; the page's main
 thread ≤ 1 ms a frame, no task over 50 ms; open to a ready frame ≤ 2 s; a prepared cut ≤ 1 frame late; input seen
-the next frame. A scene made by these principles passes; one that doesn't, isn't done.
+the next frame. A scene made by these principles passes; one that doesn't, isn't done. `measure_scene` measures it
+and says which hold.

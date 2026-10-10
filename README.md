@@ -153,6 +153,15 @@ the other.
 `engine: "<branch>"` — drawn by the engine a pushed branch of moood's own repository has (its `moood/web`), not the
 site's: for the engine's own developers — commit and push the engine change, name the branch; on either `on`.
 
+**Measuring.** `measure_scene(address, scene?, version?)` — or `(address, branch, folder)`, a pushed branch's —
+measures what the scene's frames cost: played on the GPU on the real clock as a viewer has it (opened, its film or
+showcase, zoom, drag, lean, walking, cuts) and held against the thresholds of `principles.md` ("What a frame must
+cost"). About two minutes a size (`sizes`: `["1080p"]` by default, `"4k"`), in the background: a link at once, kept an
+hour, that answers 202 while it is measured, then the report as text — each threshold ok or FAIL; per segment the frame
+intervals, the scene thread's JS by stage, the GPU's time, repaints and uploads; GC pauses; and the elements painted
+again most, with the keys they read. Measure a scene once it is written and reviewed, before merging — not after every
+change. `engine: "<branch>"` as above.
+
 ## Rendering on your own machine
 
 `npm i -g @moood/render`, then `moood-render <world>/scenes/<folder> --at 0,2.5` — a scene of a
