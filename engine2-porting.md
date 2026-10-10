@@ -7,6 +7,8 @@ reached another way, never simplified away.
 
 ## How to work
 
+`principles.md` first — its rules (and its pitfalls already met) hold for every port.
+
 1. Read the old scene whole (scene.json, elements, lib, script, relief, notes) and what plays on it: every key, element
    id, named point (`e.at` names, `id#point`) and person id a game or another scene uses must keep its meaning — or say
    what changes and why.

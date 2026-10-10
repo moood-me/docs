@@ -7,6 +7,10 @@ world is played. Games are played on worlds; this is about the worlds.
 You act for a person, with their rights: what they may see, you see; what they may change, you
 change.
 
+**Read `principles.md` first**: what matters here (the viewer's quality and performance, only the right ways, no
+prop-ups for one scene, all the beauty kept), how to work (by reading, not by render loops; rendering on the GPU),
+what a scene and a game must be, and the pitfalls already met.
+
 ## Two ways in
 
 - **MCP** (moood's MCP server, connected in your client): read worlds and scenes, make them, edit a scene in
