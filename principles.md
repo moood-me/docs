@@ -83,6 +83,15 @@ habit of yours disagree, the rule wins.
 - A point a game needs on a close-up or the sky: mark it (`e.at`) in the insert / sky — the page gets it as a
   screen point.
 - A mirror shows only where its plane is painted.
+- A mirror's image is a small plain copy: no shadows in it, a little softer than the scene, and a mirror seen in
+  another mirror does not mirror there. A looking-glass that must be sharp: `"blur"` under 0.03.
+- The light in the air (`hazeGlow`, `shafts`) is soft: a beam has no sharp edge and shows no glazing bars.
+- Light is worked out at a painting's points, not at every pixel: a lamp's pool on a wall or a floor is soft, and a
+  shadow or the sun's patch through a window is sharp only on what is opaque and faces a way (the ground, a plane, a
+  card with `facing`) or is named in the shadow's `onto` — a floor meant to take them is a plane, a wall a card with
+  `facing`; on a card with no `facing`, on a layer, on anything see-through they are a soft dimming. Only the two
+  lights that matter most to the view cast sharp shadows at once.
+- A `translucent` thing casts a lighter shadow, not a coloured one.
 - Several agents on one world: the shared modules have one owner; others ask for changes through them.
 
 ## A game
