@@ -19,6 +19,12 @@ habit of yours disagree, the rule wins.
 - **Keep all the beauty.** Nothing beautiful in a scene is dropped or simplified when it is rewritten. Reach it
   another way if the old way doesn't fit (a GPU-friendly way, as good games do) — don't insist on "as it was",
   but never lose it.
+- **Beauty is what the viewer perceives** — mood, light, colour, people clearly read, a reflection in a mirror, haze
+  in a room — not mathematical exactness or physical truth. The same impression can be reached dearly or cheaply:
+  choose the cheap way that looks alike.
+- **For every device.** The game is for weak laptops with integrated graphics and Android phones as much as for a
+  strong machine: what is known to be costly there is given up — known from theory and from reading the code, not
+  waited for as a measurement on one machine.
 
 ## How to work
 
