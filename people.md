@@ -289,6 +289,10 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
   in front" and check the pelvis's height (a chair's ~0.55 m, the floor's ~0.15 m) before using it. Children move as
   small adults; "carrying a child" comes with the arms held out — lower the child with `on`'s `up`.
 - A figure of shapes' face (`simple`) takes an expression (`<id>_mood`) but does not talk; a body's mouth talks without words (it follows no voice).
+- Loose cloth (a gown's skirt, a coat's tails, long hair) swings by what the body did in the last second or two. A
+  cut puts it on as it hangs at rest in the new pose, at once; so does a jump in the showcase (to the start of the beat
+  it lands in — everything else there is exactly as played) and a body set somewhere else at once (further than half a
+  metre in a frame). A render of a moment is the same picture every time.
 - Without WebGL2 (an old browser) people of an old-engine scene are drawn as flat silhouettes; engine 2 needs WebGL2.
 
 ## How it is made (if you need it)
