@@ -25,6 +25,9 @@ habit of yours disagree, the rule wins.
 - **For every device.** The game is for weak laptops with integrated graphics and Android phones as much as for a
   strong machine: what is known to be costly there is given up — known from theory and from reading the code, not
   waited for as a measurement on one machine.
+- **Don't code uncertainty.** No fallback paths: a thing is done one way, always. It works — or it doesn't, and then
+  it is fixed. Two modes only as a deliberate decision with reasons that fit the other rules. A prop on a prop means
+  something was not done as asked: remove the cause.
 
 ## How to work
 
