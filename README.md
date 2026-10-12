@@ -36,10 +36,11 @@ through the one they follow.
     scenes/<folder>/scene.json         a scene: its spec without its code
     scenes/<folder>/elements/<id>.js   an element's code          (objects[].code in the spec)
     scenes/<folder>/elements/<id>.script.js   an element's script (objects[].script)
-    scenes/<folder>/elements/<id>.animate.js  what moves it each frame (objects[].animate — engine 2)
+    scenes/<folder>/elements/<id>.animate.js  what moves it each frame (objects[].animate — engine 2, engine 3)
     scenes/<folder>/elements/<id>.glsl  its own shader            (objects[].shader — engine 2)
+    scenes/<folder>/elements/<id>.wgsl  its own shader            (objects[].shader — engine 3)
     scenes/<folder>/script.js          the scene's script          (spec.script)
-    scenes/<folder>/showcase.js        its own scenario outside games (spec.showcase — engine 2)
+    scenes/<folder>/showcase.js        its own scenario outside games (spec.showcase — engine 2, engine 3)
     scenes/<folder>/lib.js             code its elements share      (spec.lib)
     scenes/<folder>/relief.js          the land's shape            (spec.relief)
     scenes/<folder>/widgets/<id>.html  a widget's markup           (widgets[].html)
@@ -50,7 +51,9 @@ through the one they follow.
 
 A file belongs to the element or widget of `scene.json` with that `id`; a file nothing in
 `scene.json` names is an error. An element's code is the body of its draw function, as
-`scene-format.md` describes. A new folder is a new scene. The repository's name is
+`scene-format.md` describes (the text of the scene's engine: What a scene is, below). An element's shader is the
+file its scene's engine names: `.wgsl` in a scene that says `"engine": 3`, `.glsl` in any other — the other one
+is a file nothing names. A new folder is a new scene. The repository's name is
 `<space>--<slug>`; the world's address on moood is `<space>/<slug>`.
 
 ## Modules
@@ -148,7 +151,8 @@ Each draws the scene from its starting viewpoint, or:
 and a film there is short, 120 frames at most) or `"gpu"` (a GPU, for heavy scenes and long films —
 up to 3000 frames). The GPU sleeps after 15 minutes unused: a call then wakes it and says so — ask
 again in a minute or two (a film or a pack waits for it by itself). Nothing falls back from one to
-the other.
+the other. A scene that says `"engine": 3` is always drawn on the GPU, whatever `on` says — its engine draws
+nowhere else; so are its tiles and every other picture of it, and a call that finds the GPU asleep says so.
 
 `engine: "<branch>"` — drawn by the engine a pushed branch of moood's own repository has (its `moood/web`), not the
 site's: for the engine's own developers — commit and push the engine change, name the branch; on either `on`.
@@ -171,16 +175,28 @@ without the site: a PNG for each moment and the errors its code threw. Its READM
 It draws WebGL in software: a single frame is quick, a long film is better made with `film` above.
 (`--server` draws on moood's GPU with an engine sent from a checkout of moood itself — for the engine's own
 developers, as the tools above do with `engine`; a world's scenes are drawn by the site's engine.)
+A scene that says `"engine": 3` is not drawn in software: `moood-render` draws it only with `--server`.
 
 ## What a scene is
 
 `scene-format.md` — the scene's language and its craft: the schema, the elements, how they are
 painted and moved, state and the director (actions, sequences, events), the showcase, the camera,
 light. It is the text moood's own artist works from: where it says to answer with a JSON object, you
-write the files instead. The MCP tool `scene_format` returns the same text.
+write the files instead. The MCP tool `scene_format` returns the same text — each engine's by its number
+(below).
 
-Two engines run scenes. Every new scene is engine 2's (`"engine": 2` in its `scene.json`): painted
-once per state, everything that moves moved on the GPU, driven by events — `scene-format.md`. A scene
-made before, without `"engine": 2`, runs on the old engine in its own older language —
-`scene-format-1.md` (`scene_format(engine=1)`) — until it is rewritten for engine 2 (then all of it:
-its paintings static, its motion by layers, animate and the director). How to move one: `engine2-porting.md`.
+Three engines run scenes; a scene's `scene.json` says which, and a scene keeps the engine it says and that
+engine's language.
+- **Engine 3** (`"engine": 3`) — every new scene: a new world's main scene, `add_scene` and the site's artist
+  stamp it. WebGPU: it opens where the browser has WebGPU, and its pictures come only from the GPU machine (above).
+  Its language is a text of its own, complete in itself — `scene-format-3.md` (`scene_format()`): read it, not
+  `scene-format.md`, for such a scene; its own rules and principles are there. An element's shader in it is WGSL
+  (`elements/<id>.wgsl`).
+- **Engine 2** (`"engine": 2`): painted once per state, everything that moves moved on the GPU, driven by
+  events — `scene-format.md` (`scene_format(engine=2)`).
+- **The old engine** (no `"engine"`): a scene made before runs on it in its own older language —
+  `scene-format-1.md` (`scene_format(engine=1)`) — until it is rewritten for engine 2 (then all of it:
+  its paintings static, its motion by layers, animate and the director). How to move one: `engine2-porting.md`.
+
+A scene of engine 2 is carried over to engine 3 only on the world's owner's word, in a copy of the world:
+`engine3-porting.md`.

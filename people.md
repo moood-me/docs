@@ -21,10 +21,14 @@ scene.sequence(async s => {
 });
 ```
 
-This is engine 2's (a scene with `"engine": 2` — every new scene): what people do are actions of the scene's director
-— each takes as long as it truly takes, and what follows waits for it (`scene_format`: Scripts and the director). A
-scene made for the old engine (no `"engine": 2`) says the same through its keys and seconds: `scene.person(id).walk(…)`
-returns its seconds, `scene.after(seconds, …)` goes on (`scene_format(engine=1)`).
+This is engine 2's (a scene with `"engine": 2`): what people do are actions of the scene's director
+— each takes as long as it truly takes, and what follows waits for it (`scene_format(engine=2)`: Scripts and the
+director). A scene made for the old engine (no `"engine"`) says the same through its keys and seconds:
+`scene.person(id).walk(…)` returns its seconds, `scene.after(seconds, …)` goes on (`scene_format(engine=1)`).
+
+Every new scene is engine 3's (`"engine": 3`). Its people are put into a scene, and act, as this guide says of
+engine 2; what that engine's people do not have is said in its own text, the one to read for such a scene —
+`scene-format-3.md` (`scene_format()`): People.
 
 Two people by a lamp — a figure of shapes and a body, lit by it, their shadows cast:
 [people/scene-lamp.webp](https://github.com/moood-me/docs/blob/main/people/scene-lamp.webp).
@@ -294,8 +298,11 @@ Each writes a JSON snippet for the cast's data and a picture to look at first (t
   it lands in — everything else there is exactly as played) and a body set somewhere else at once (further than half a
   metre in a frame). A render of a moment is the same picture every time.
 - Without WebGL2 (an old browser) people of an old-engine scene are drawn as flat silhouettes; engine 2 needs WebGL2.
+  An engine-3 scene needs WebGPU.
 
 ## How it is made (if you need it)
+
+Engine 3: `web/scene3/people/` — its own, reading the same motions and data (`web/scene/people/`).
 
 Engine 2: `web/scene2/people/` — each person a skinned mesh in the scene (their look's figure of shapes or body, its
 garments and loose cloth), posed once a frame by the motion player into their bones, lit, shadowed and mirrored with

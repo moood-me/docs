@@ -4,6 +4,12 @@ Read this first. It is how this project works, said by its author; the other doc
 `people.md`, `engine2-porting.md`) say how — this says what matters and what never to do. When a rule here and a
 habit of yours disagree, the rule wins.
 
+Three engines run scenes, and a scene says which (`README.md`, "What a scene is"). Every new scene is engine 3's
+(`"engine": 3`): its language, with that engine's own rules and principles, is `scene-format-3.md`
+(`scene_format()`), and carrying a scene over to it is `engine3-porting.md`. What follows was written for the scenes
+of engine 2 and of the old engine and stands for them as it is; for an engine-3 scene, where `scene-format-3.md`
+says otherwise — what a scene must be, what a frame costs —, that text is the one to follow.
+
 ## What matters
 
 - **Quality for the viewer and performance** — not ease of making. Never pick the easy way or "good enough";
