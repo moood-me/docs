@@ -18,17 +18,15 @@ what a scene and a game must be, and the pitfalls already met.
   sees every draft live. Good for a quick change of one scene.
 - **The world's git repository**: everything else — many files, many scenes, anything long, shared
   code. `world_repo(address)` (an MCP tool) gives you the clone URL and a token for that repository
-  alone (an hour; ask again for another).
+  alone (an hour; ask again for another); with GitHub access of your own to the org `moood-me`, use that.
 
-Both lead to the same place: a world lives in its repository. Each deployment of moood has a
-branch of its own there — `env/dev` is moood's own, `env/<computer>/<stack>` a stack on someone's computer;
+Both lead to the same place: a world lives in its repository, `moood-me/<space>--<slug>` — the
+repository is the world, the same one on every deployment of moood. Each deployment has a branch of its own
+there: `env/dev` is moood's own (moood.compl.dev), `env/<computer>/<stack>` a stack on someone's computer;
 there is no `main`. The deployment's branch is the world, for that deployment: every change of a
-scene there is a new version of it; nothing is ever lost. `world_repo` says which branch is the
-deployment's you work with (`branch`). A deployment's branch follows another's — usually moood's
-own — while it has nothing of its own: it moves on with it, and once all it had is there too
-(merged, squashed — however), it goes on following. What it has of its own reaches another
-deployment only when you merge it there; so agents on different deployments see each other's work
-through the one they follow.
+scene there is a new version of it; nothing is ever lost. A deployment shows a world whose repository has its
+branch — a stack's branch follows another (usually `env/dev`): made from it, moved on with it while it has
+nothing of its own. `world_repo` says which branch is the deployment's you work with (`branch`).
 
 ## The repository
 
@@ -93,20 +91,27 @@ the way the scene format asks.
 
 ## Working in it
 
-1. `world_repo(address)` → clone with the git arguments it gives (the token travels in a header —
-   never put it into a URL or a credential store).
-2. Make a branch of your own, begun from the deployment's (`branch`). **Never push to a
-   deployment's branch (`env/…`).**
-3. Change files; commit and push your branch as often as you like.
-4. `look_at_branch(address, branch, folder)` shows a scene of your branch rendered, with the errors
+1. Clone — with the git arguments `world_repo(address)` gives (the token travels in a header — never put
+   it into a URL or a credential store), or with your own access.
+2. Work in a branch of your own, begun from the deployment's (`branch`); commit and push it as often as
+   you like.
+3. `look_at_branch(address, branch, folder)` shows a scene of your branch rendered, with the errors
    its code throws (moments, sheets, films: Looking at your work, below). Look at your work: does it
    show what was asked, and is it beautiful?
-5. `merge_branch(address, branch, note)` puts the branch into the world: each scene it changed gets
-   a new version, a new folder a new scene. It is refused — nothing changes — if the branch changes
-   a scene the person may not change, leaves a folder that isn't a scene, or conflicts with the
-   deployment's branch (merge that into your branch, push, try again). The branch is deleted once
-   merged. To bring work of one deployment into another, push a branch begun from the other one's
-   and merge it there — through that deployment's MCP.
+4. Put it into the deployment's branch: merge it there with git and push — or `merge_branch(address,
+   branch, note)`, which checks it first and refuses, changing nothing, if the branch changes a scene the
+   person may not change, leaves a folder that isn't a scene, or conflicts (merge the deployment's branch
+   into yours, push, try again); it deletes your branch once merged. Either way each scene changed gets a
+   new version, a new folder a new scene. A deployment's branch only goes forward: never rewrite it (no
+   force-push, no rebase) — plays and versions hold its commits.
+5. Another deployment gets the work the same way: merge into its branch. A world it doesn't have yet (its
+   branch isn't in the repository) it gets once you push that branch — made from yours.
+
+A new world: `create_world` — or make the repository yourself: a private `moood-me/<space>--<slug>`
+(`<space>`: the person's handle), with `world.json` (`{"title", "description", "themes": {}, "main": "<the
+main scene's folder>"}`) and that scene's folder, pushed as a deployment's branch (`env/…`). Every deployment
+where the person is shows it once it has its branch. A name is one world: never make a second repository for a
+world there is — `create_world` refuses a name taken, here or by another deployment.
 
 moood formats the code it writes (Biome: 2 spaces, 120 columns); write your code readably too, one
 statement a line.
@@ -124,10 +129,12 @@ it began).
 
 Through the MCP: `list_games`, `create_game`, `read_game` (game.json and its type's files),
 `change_game` (title, description, genres, who sees it), `write_game_file` (one file of its type —
-the game's next version). For more: `game_repo` (clone it, a branch of your own) and
-`merge_game_branch` — refused if the branch changes anything but `game.json` and its type's folder,
-or if `game.json` is no longer this game (its type changed, a world or a scene it names isn't there).
-Only a game's author changes it.
+the game's next version). For more: `game_repo` (clone it, a branch of your own), then merge it into the
+deployment's branch yourself or with `merge_game_branch` — which refuses if the branch changes anything but
+`game.json` and its type's folder, or if `game.json` is no longer this game (its type changed, a world or a
+scene it names isn't there). A new game is made the same two ways as a world: `create_game`, or the repository
+`moood-me/<space>--game--<slug>` with its `game.json`, pushed as a deployment's branch. Only a game's author
+changes it.
 
 A game's own sounds (Web Audio in `bespoke/`) obey the listener's third slider, "sounds" (beside music and voices;
 `web/scene/volume.js`): the game puts `MooodVolume.output(ctx)` — a gain of its `AudioContext` that follows the
