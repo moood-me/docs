@@ -129,6 +129,11 @@ the game's next version). For more: `game_repo` (clone it, a branch of your own)
 or if `game.json` is no longer this game (its type changed, a world or a scene it names isn't there).
 Only a game's author changes it.
 
+A game's own sounds (Web Audio in `bespoke/`) obey the listener's third slider, "sounds" (beside music and voices;
+`web/scene/volume.js`): the game puts `MooodVolume.output(ctx)` — a gain of its `AudioContext` that follows the
+slider — between its sounds and `ctx.destination`, and never reads the slider itself. Lines of speech go through
+`MooodSpeech` and obey "voices".
+
 ## Looking at your work
 
 Three tools render a scene with moood's own engine — the version the site runs — and answer the
@@ -144,12 +149,15 @@ Each draws the scene from its starting viewpoint, or:
   other cameras on each moment; `sheet: true` — all of them in one labelled picture (up to 32
   frames). A sheet is the cheapest way to see a film move.
 - `film: {"from": 0, "to": 60, "fps": 10}` — that stretch as an MP4; `pack: {"at": [...]}` — the
-  frames as PNGs in a ZIP. Both are made in the background: you get a link at once, kept an hour,
-  that answers 202 while it is made and then the file.
+  frames as PNGs in a ZIP. Both are made in the background: you get a link at once that answers 202
+  (and how far it is) while it is made and then the file (kept an hour). Ask after the link again within ten
+  minutes, till the file is there: unasked after for that long, it is let go.
+- The render service takes only so many renders at once (a few, of everyone's): full, it refuses a new one at
+  once — "busy …", in the tool's answer or at a film's link. Ask later; do not ask again in a loop.
 
 `on` says where it is drawn: `"server"` (the default — WebGL on the server's CPU: seconds a frame,
 and a film there is short, 120 frames at most) or `"gpu"` (a GPU, for heavy scenes and long films —
-up to 3000 frames). The GPU sleeps after 15 minutes unused: a call then wakes it and says so — ask
+up to 3000 frames). The GPU sleeps while unused: a call then wakes it and says so — ask
 again in a minute or two (a film or a pack waits for it by itself). Nothing falls back from one to
 the other. A scene that says `"engine": 3` is always drawn on the GPU, whatever `on` says — its engine draws
 nowhere else; so are its tiles and every other picture of it, and a call that finds the GPU asleep says so.
@@ -160,8 +168,9 @@ site's: for the engine's own developers — commit and push the engine change, n
 **Measuring.** `measure_scene(address, scene?, version?)` — or `(address, branch, folder)`, a pushed branch's —
 measures what the scene's frames cost: played on the GPU on the real clock as a viewer has it (opened, its film or
 showcase, zoom, drag, lean, walking, cuts) and held against the thresholds of `principles.md` ("What a frame must
-cost"). About two minutes a size (`sizes`: `["1080p"]` by default, `"4k"`), in the background: a link at once, kept an
-hour, that answers 202 while it is measured, then the report as text — each threshold ok or FAIL; per segment the frame
+cost"). About two minutes a size (`sizes`: `["1080p"]` by default, `"4k"`), in the background: a link at once that
+answers 202 (and how far it is) while it is measured — ask after it again within ten minutes: unasked after for
+that long, the measuring is let go —, then the report as text (kept an hour) — each threshold ok or FAIL; per segment the frame
 intervals, the scene thread's JS by stage, the GPU's time, repaints and uploads; the GPU's and the thread's time by
 pass of the renderer's frame (shadows, opaque, skies, blends, bloom, upscale …); GC pauses; and the elements painted
 again most, with the keys they read. Measure a scene once it is written and reviewed, before merging — not after every
