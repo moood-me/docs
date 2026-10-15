@@ -30,7 +30,7 @@ nothing of its own. `world_repo` says which branch is the deployment's you work 
 
 ## The repository
 
-    world.json                         title, description, themes, main (the main scene's folder)
+    world.json                         title, description, themes, main (the main scene's folder; none: the first scene)
     scenes/<folder>/scene.json         a scene: its spec without its code
     scenes/<folder>/elements/<id>.js   an element's code          (objects[].code in the spec)
     scenes/<folder>/elements/<id>.script.js   an element's script (objects[].script)
@@ -108,10 +108,11 @@ the way the scene format asks.
    branch isn't in the repository) it gets once you push that branch — made from yours.
 
 A new world: `create_world` — or make the repository yourself: a private `moood-me/<space>--<slug>`
-(`<space>`: the person's handle), with `world.json` (`{"title", "description", "themes": {}, "main": "<the
-main scene's folder>"}`) and that scene's folder, pushed as a deployment's branch (`env/…`). Every deployment
-where the person is shows it once it has its branch. A name is one world: never make a second repository for a
-world there is — `create_world` refuses a name taken, here or by another deployment.
+(`<space>`: the person's handle), with `world.json` (`{"title", "description", "themes": {}}`) and its scenes'
+folders, if any yet, pushed as a deployment's branch (`env/…`). Every deployment where the person is shows it
+once it has its branch. A name is one world: never make a second repository for a world there is —
+`create_world` refuses a name taken, here or by another deployment. A world may have no scene; its main scene
+is its first, unless `world.json`'s `"main"` names another's folder.
 
 moood formats the code it writes (Biome: 2 spaces, 120 columns); write your code readably too, one
 statement a line.
@@ -206,8 +207,7 @@ write the files instead. The MCP tool `scene_format` returns the same text — e
 
 Three engines run scenes; a scene's `scene.json` says which, and a scene keeps the engine it says and that
 engine's language.
-- **Engine 3** (`"engine": 3`) — every new scene: a new world's main scene, `add_scene` and the site's artist
-  stamp it. WebGPU: it opens where the browser has WebGPU, and its pictures come only from the GPU machine (above).
+- **Engine 3** (`"engine": 3`) — every new scene: `add_scene` and the site's artist stamp it. WebGPU: it opens where the browser has WebGPU, and its pictures come only from the GPU machine (above).
   Its language is a text of its own, complete in itself — `scene-format-3.md` (`scene_format()`): read it, not
   `scene-format.md`, for such a scene; its own rules and principles are there. An element's shader in it is WGSL
   (`elements/<id>.wgsl`).
