@@ -35,7 +35,8 @@ Schema:
   "notes": string,                 // yours, for whoever works on this scene next — you again, another artist, an assistant (optional, below)
   "music": {                       // the scene's soundtrack, generated live (instrumental, no vocals) from these descriptions mixed by weight
     "prompts": [ { "text": string, "weight": 0..2 } ],  // many (15–25) distinct, vivid descriptions in English — genre, instruments and how they're played, mood, texture, tempo feel, era, place; weight the few that fit this scene best, leave most at 0: the author tries them with sliders
-    "bpm": 60..200, "density": 0..1, "brightness": 0..1 }  // optional
+    "bpm": 60..200, "density": 0..1, "brightness": 0..1,  // optional
+    "scale": "C_MAJOR_A_MINOR" }  // optional: the key — a major and its relative minor, one of C_MAJOR_A_MINOR, D_FLAT_MAJOR_B_FLAT_MINOR, D_MAJOR_B_MINOR, E_FLAT_MAJOR_C_MINOR, E_MAJOR_D_FLAT_MINOR, F_MAJOR_D_MINOR, G_FLAT_MAJOR_E_FLAT_MINOR, G_MAJOR_E_MINOR, A_FLAT_MAJOR_F_MINOR, A_MAJOR_G_FLAT_MINOR, B_FLAT_MAJOR_G_MINOR, B_MAJOR_A_FLAT_MINOR; one for the whole world (every scene of it, and its game's mini-games: style({key}))
 }
 color = "#rrggbb".
 A word the engine does not know — in the spec, in an element, a layer's options, a light, particles — is said once in the scene's warnings, naming where, and not taken: write only the words of this text.
