@@ -136,6 +136,9 @@ scene it names isn't there). A new game is made the same two ways as a world: `c
 `moood-me/<space>--game--<slug>` with its `game.json`, pushed as a deployment's branch. Only a game's author
 changes it.
 
+A bespoke game's mini-games (on engine-3 scenes) are made in the language of mini-games — how, and how to choose a
+mechanic that is the character's action and the player's feeling: `minigames.md`.
+
 A game's own sounds (Web Audio in `bespoke/`) obey the listener's third slider, "sounds" (beside music and voices;
 `web/scene/volume.js`): the game puts `MooodVolume.output(ctx)` — a gain of its `AudioContext` that follows the
 slider — between its sounds and `ctx.destination`, and never reads the slider itself. Lines of speech go through
