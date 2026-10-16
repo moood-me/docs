@@ -143,7 +143,9 @@ mechanic that is the character's action and the player's feeling: `minigames.md`
 A game's own sounds (Web Audio in `bespoke/`) obey the listener's third slider, "sounds" (beside music and voices;
 `web/scene/volume.js`): the game puts `MooodVolume.output(ctx)` — a gain of its `AudioContext` that follows the
 slider — between its sounds and `ctx.destination`, and never reads the slider itself. Lines of speech go through
-`MooodSpeech` and obey "voices". `bespoke/` may hold files other than code — a recording (MP3), a picture — served as
+`MooodSpeech` and obey "voices". The play's pause and the author's menu are the page's, the same for every game: a
+game draws no ⏸ and no ☰ of its own — it stops what is its own (its sounds) on `bespoke.onPause(fn)`, and gives
+`bespoke.menu(open)` what opens its menu (its chapters, where the play stands — drawn as it likes). `bespoke/` may hold files other than code — a recording (MP3), a picture — served as
 they are beside it: the code fetches them by its own address, `new URL('sounds/sea.mp3', import.meta.url)`. Only what
 is free to put in a public repository (CC0, or the author's own), and a few hundred KB each: every file is loaded by
 whoever plays.
